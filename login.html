@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+</head>
+         <link rel="stylesheet" type="text/css" href="css/zhucedenglu.css"/>
+          <script type="text/javascript">
+           function login()  {
+            var name=document.getElementById("u").value;
+            var password=document.getElementById("p").value;
+            var uname=localStorage.getItem("uname");
+            var upwd=localStorage.getItem("upwd");
+            if(name==uname&& password==upwd)
+            {
+              alert("登录成功");
+            }
+            else
+            {
+              alert("账号或密码不正确！");
+            }
+            self.close();
+            }
+          </script>
+
+<body>
+  <div class="box0">
+    <img src="img/home.jpg">
+    <from action="" method="post">
+        <span>用户名：</span><input type="text" name="" id="u" value="" /><br>
+        <span>密码：</span> <input type="password" name="" id="p" value=""/><br>
+        <input type="submit" value="登录" onclick="login()"/>
+
+    </from>
+  </div>
+</body>
+</html>

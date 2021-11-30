@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/css1.css">
+</head>
+<body>
+ <div class="box0">
+    <!-- 导航栏-->
+    <div class="daohang1">
+        游客您好！欢迎来到咖啡网上商城
+        <a href="" onclick="login()"> [登录] </a>
+        <a href="" onclick="register()">[免费注册] </a>
+        <ul>
+            |<li>
+                <a href=""> [我的订单] </a>
+            </li>
+            |<li>
+                <a href="">[ 购物车] </a>
+            </li>
+            |<li>
+                 <a href=""> 帮助中心</a>
+             </li>
+        </ul>
+    </div>
+      <div class="sousuo">
+        <img src="img/site_logo.gif">
+        <from action="" mothod="post">
+            <input class="input1" type=text" name="" id="" value=""/>
+            <input class="input2" type="submit" value="探索"/>
+        </from>
+        <ul>
+            <li><a href="购物车.html">购物车</a> </li>
+            <li><a href="">我的订单</a> </li>
+        </ul>
+    </div>
+     <table border="" cellspacing="" cellpadding="" width="100%">
+         <tr height="40px">
+             <td width="10%">
+                 <input type="checkbox" name="" id="" value="" onchange="selectall(this)"/>全选</td>
+             <td width="40%">商品信息</td>
+             <td width="10%">单价</td>
+             <td width="10%">数量</td>
+             <td width="10%">金额</td>
+             <td width="20%">操作</td>
+         </tr>
+
+         <tr height="100px" style="background-color: sandybrown;">
+             <td width="10%">
+                 <input type="checkbox" name="" class="select" value="" ONCHANGE="zongjisuan()"/>
+                <img src="img/taobao/1.jpg_.webp">
+             </td>
+             <td width="40%">白咖啡是什么...</td>
+             <td width="10%">
+                 <b>33</b>
+             </td>
+             <td width="10%">
+                 <input type="number" name="" id="" value="1" min="0" max="100" onchange="price(this)"/>
+             </td>
+             <td width="10%">
+                 <b>33</b>
+             </td>
+             <td width="20%">
+                 <ul>
+                     <a href=""><li>删除</li></a>
+                     <a href=""><li>收藏</li></a>
+                 </ul>
+             </td>
+         </tr>
+     </table>
+     <h1 id="n">总数量</h1>
+     <h1 id="p">总金额</h1>
+ </div>
+</body>
+<script>
+    function selectall(t) {
+        var selects = document.getElementsByClassName("select");
+        if (t.checked == true) {
+            for (var i = 0; i < selects.length; i++) {
+                selects[i].checked = true;
+            }
+        }
+            else
+        {
+            for (var i = 0; i < selects.length; i++)
+            {
+                selects[i].checked = false;
+            }
+        }
+            zongjisuan();
+    }
+
+
+    function price(t){
+          var n=t.value;
+            var p=t.parentNode.previousElementSibling.children[0].innerHTML;
+            t.parentNode.nextElementSibling.children[0].innerHTML=p*n;
+            zongjisuan();
+    }
+
+    function zongjisuan()
+    {
+        var n=0;
+        var p=0;
+
+        var selects=document.getElementsByClassName("select");
+        for(var i=0;i<selects.length;i++)
+        {
+            if(selects[i].checked==true)
+            {
+                n++;        /*jiayiqi*/
+               p+=Number(selects[i].parentNode.parentNode.children[4].children[0].innerHTML);
+
+            }
+        }
+        document.getElementById("n").innerHTML=n;
+        document.getElementById("p").innerHTML=p;
+    }
+</script>
+</html>

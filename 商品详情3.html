@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/css1.css">
+    <style>
+        canvas{
+            width: 100px;
+            height: 100px;
+            border: 2px solid red;
+            position: absolute;
+            border-radius: 50%;
+        }
+        table{
+            position: absolute;/*就对定位*/
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box0">
+        <!--导航栏-->
+        <div class="daohang1">
+            <span id="user">
+                游客
+            </span>
+            <a href="" onclick="login()">[登录]</a>
+            <a href="" onclick="register()">[免费注册]</a>
+            <ul>
+                |<li><a href="">我的订单</a></li>
+                |<li><a href="">购物车</a></li>
+                |<li><a href="">帮助中心</a></li>
+            </ul>
+        </div>
+        <div class="sousuo">
+        <img src="img/site_logo.gif">
+        <from action="" mothod="post">
+            <input class="input1" type=text" name="" id="" value=""/>
+            <input class="input2" type="submit" value="探索"/>
+        </from>
+        <ul>
+            <li><a href="">购物车</a> </li>
+            <li><a href="">我的订单</a> </li>
+        </ul>
+    </div>
+        <!--导航烂2-->
+    <div class="daohang2">
+        <ul>
+            <li id="anniu"><a href="">全部商品分类</a></li>
+            <li><a href="">首页</a></li>
+            <li><a href="">商品分类</a></li>
+            <li><a href="">商品详情</a></li>
+        </ul>
+    </div>
+        <div class="left">
+            <table border="" cellspacing="" cellpadding="" width="500px">
+					<tr height="500px">
+						<td colspan="4">
+							<img id="tu" src="img/taobao/2.jpg_.webp" width="100%" onmousemove="fangdajing(event)"
+                            onmouseout="xiaoshi()">
+                            <canvas id="mycanvas" width="" height="">
+
+                            </canvas>
+						</td></tr>
+					<tr height="125px">
+						<td><img src="img/taobao/1.jpg_.webp" width="100%" onmouseenter="xianshi(this)"></td>
+						<td><img src="img/taobao/2.jpg_.webp" width="100%" onmouseenter="xianshi(this)"></td>
+						<td><img src="img/taobao/3.jpg_.webp" width="100%" onmouseenter="xianshi(this)"></td>
+						<td><img src="img/taobao/4.jpg_.webp" width="100%" onmouseenter="xianshi(this)"></td>
+					</tr>
+            </table>
+        </div>
+        <div class="right">
+            <h2 id="n">商品名称</h2>
+            <p id="i">商品详情</p>
+            <h2 id="p">商品价格</h2>
+                <ul>
+                    <a href="购物车.html"><li>加入购物车</li></a>
+                    <a href=""><li>立即购买</li></a>
+                </ul>
+        </div>
+        <div class="dibu">
+            文字说明文字说明
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery.min.js">
+
+</script>
+<script>
+    var canvas=document.getElementById("mycanvas");
+    var context=canvas.getContext("2d");
+    canvas.style.display="none";
+    function fangdajing(e)
+    {
+        canvas.style.display="block";
+        canvas.style.left=e.layerX+10+"px";
+        canvas.style.top=e.layerY+10+"px";
+        var img=new Image;
+
+        img.src=document.getElementById("tu").src;
+        var image=document.getElementById("tu");
+        var sw=img.width/image.width;
+        var sh=img.height/image.height;
+
+        context.clearRect(0,0,100,100);
+        context.drawImage(img,e.layerX*sw,e.layerY*sh,50*sw,50*sh,0,0,canvas.width,canvas.height);
+
+    }
+
+    function xiaoshi()
+    {
+        canvas.style.display="none";
+
+    }
+
+    function xianshi(t)
+    {
+        document.getElementById("tu").src=t.src;
+    }
+    var loc=window.location.href;
+    var n=loc.indexOf("=");
+    var id=loc.substr(n+1);
+    loaddata(id);
+    function loaddata(i)
+    {
+        $.ajax
+        (
+        {
+            url:"data/"+i+".json",
+            type:"get",
+            dataType:"json",
+            data:{},
+            error:function (data){
+                alert("读取失败");
+            },
+            success:function (data){
+               // alert("name"+data.name+"price:"+data.price);
+                document.getElementById("n").innerHTML="商品名称:"+ data.name;
+                document.getElementById("i").innerHTML="商品详情:"+ data.info;
+                document.getElementById("i").innerHTML="商品详情:"+ data.price;
+                document.getElementById("tu").src="img/taobao/" + data.img;
+            }
+        }
+        );
+    }
+</script>
+</html>
